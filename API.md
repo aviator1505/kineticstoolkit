@@ -1,14 +1,23 @@
-# KineticsTookit (KTK) API Reference\n\nKinetics Toolkit
+# KineticsTookit (KTK) API Reference
+
+Kinetics Toolkit
 
 ================
 
 To get started, please consult Kinetics Toolkit's
 [website](https://kineticstoolkit.uqam.ca)
 
->>> import kineticstoolkit as ktk\n\n---\n\n## Module: `kineticstoolkit.lab`\n\nKinetics Toolkit - Lab mode
->>> ===========================
->>>
->>
+```python
+import kineticstoolkit as ktk
+```
+
+---
+
+## Module: `kineticstoolkit.lab`
+
+Kinetics Toolkit - Lab mode
+===========================
+
 
 This module loads Kinetics Toolkit in lab mode. The standard way to use this
 module is:
@@ -16,11 +25,21 @@ module is:
     import kineticstoolkit.lab as ktk
 
 To get started, please consult Kinetics Toolkit's
-[website](https://felixchenier.uqam.ca/kineticstoolkit)\n\n## Module: `kineticstoolkit.timeseries`\n\nProvide the TimeSeries and TimeSeriesEvent classes.
+[website](https://felixchenier.uqam.ca/kineticstoolkit)
+
+## Module: `kineticstoolkit.timeseries`
+
+Provide the TimeSeries and TimeSeriesEvent classes.
 
 The classes defined in this module are accessible directly from the top-
 level Kinetics Toolkit's namespace (i.e. ktk.TimeSeries,
-ktk.TimeSeriesEvent)\n\n### **Classes**\n\n### `TimeSeries(src: 'None | TimeSeries | pd.DataFrame | ArrayLike' = None, *, time: 'ArrayLike' = [], time_info: 'dict[str, Any]' = {'Unit': 's'}, data: 'dict[str, ArrayLike]' = {}, data_info: 'dict[str, dict[str, Any]]' = {}, events: 'list[TimeSeriesEvent]' = [])`\n\nA class that holds time, data series, events and metadata.
+ktk.TimeSeriesEvent)
+
+### **Classes**
+
+### `TimeSeries(src: 'None | TimeSeries | pd.DataFrame | ArrayLike' = None, *, time: 'ArrayLike' = [], time_info: 'dict[str, Any]' = {'Unit': 's'}, data: 'dict[str, ArrayLike]' = {}, data_info: 'dict[str, dict[str, Any]]' = {}, events: 'list[TimeSeriesEvent]' = [])`
+
+A class that holds time, data series, events and metadata.
 
 Attributes
 ----------
@@ -54,152 +73,152 @@ or any array with at least one dimension.
 
 1. Creating an empty TimeSeries:
 
->>> ktk.TimeSeries()
->>> TimeSeries with attributes:
->>> time: array([], dtype=float64)
->>> data: {}
->>> time_info: {'Unit': 's'}
->>> data_info: {}
->>> events: []
->>>
->>
+ktk.TimeSeries()
+TimeSeries with attributes:
+time: array([], dtype=float64)
+data: {}
+time_info: {'Unit': 's'}
+data_info: {}
+events: []
+
+
 
 2. Creating a TimeSeries and setting time and data:
 
->>> ktk.TimeSeries(time=np.arange(0, 10), data={"test":np.arange(0, 10)})
->>> TimeSeries with attributes:
->>> time: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
->>> data: {'test': array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])}
->>> time_info: {'Unit': 's'}
->>> data_info: {}
->>> events: []
->>>
->>
+ktk.TimeSeries(time=np.arange(0, 10), data={"test":np.arange(0, 10)})
+TimeSeries with attributes:
+time: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+data: {'test': array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])}
+time_info: {'Unit': 's'}
+data_info: {}
+events: []
+
+
 
 3. Creating a TimeSeries as a copy of another TimeSeries:
 
->>> ts1 = ktk.TimeSeries(time=np.arange(0, 10), data={"test":np.arange(0, 10)})
->>> ts2 = ktk.TimeSeries(ts1)
->>> ts2
->>> TimeSeries with attributes:
->>> time: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
->>> data: {'test': array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])}
->>> time_info: {'Unit': 's'}
->>> data_info: {}
->>> events: []
->>>
->>
+ts1 = ktk.TimeSeries(time=np.arange(0, 10), data={"test":np.arange(0, 10)})
+ts2 = ktk.TimeSeries(ts1)
+ts2
+TimeSeries with attributes:
+time: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+data: {'test': array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])}
+time_info: {'Unit': 's'}
+data_info: {}
+events: []
+
+
 
 See Also: TimeSeries.copy
 
 4. Creating a TimeSeries from a Pandas DataFrame:
 
->>> df = pd.DataFrame()
->>> df.index = [0., 0.1, 0.2, 0.3, 0.4]  # Time in seconds
->>> df["x"] = [0., 1., 2., 3., 4.]
->>> df["y"] = [5., 6., 7., 8., 9.]
->>> df["z"] = [0., 0., 0., 0., 0.]
->>> df
->>> x    y    z
->>> 0.0  0.0  5.0  0.0
->>> 0.1  1.0  6.0  0.0
->>> 0.2  2.0  7.0  0.0
->>> 0.3  3.0  8.0  0.0
->>> 0.4  4.0  9.0  0.0
->>>
->>
+df = pd.DataFrame()
+df.index = [0., 0.1, 0.2, 0.3, 0.4]  # Time in seconds
+df["x"] = [0., 1., 2., 3., 4.]
+df["y"] = [5., 6., 7., 8., 9.]
+df["z"] = [0., 0., 0., 0., 0.]
+df
+x    y    z
+0.0  0.0  5.0  0.0
+0.1  1.0  6.0  0.0
+0.2  2.0  7.0  0.0
+0.3  3.0  8.0  0.0
+0.4  4.0  9.0  0.0
 
->>> ts = ktk.TimeSeries(df)
->>> ts
->>> TimeSeries with attributes:
->>> time: array([0. , 0.1, 0.2, 0.3, 0.4])
->>> data: <dict with 3 entries>
->>> time_info: {'Unit': 's'}
->>> data_info: {}
->>> events: []
->>>
->>
 
->>> ts.data
->>> {'x': array([0., 1., 2., 3., 4.]), 'y': array([5., 6., 7., 8., 9.]), 'z': array([0., 0., 0., 0., 0.])}
->>>
->>
+
+ts = ktk.TimeSeries(df)
+ts
+TimeSeries with attributes:
+time: array([0. , 0.1, 0.2, 0.3, 0.4])
+data: <dict with 3 entries>
+time_info: {'Unit': 's'}
+data_info: {}
+events: []
+
+
+
+ts.data
+{'x': array([0., 1., 2., 3., 4.]), 'y': array([5., 6., 7., 8., 9.]), 'z': array([0., 0., 0., 0., 0.])}
+
+
 
 See Also: TimeSeries.from_dataframe
 
 5. Creating a multidimensional TimeSeries from a Pandas DataFrame (using
    brackets in column names):
 
->>> df = pd.DataFrame()
->>> df.index = [0., 0.1, 0.2, 0.3, 0.4]  # Time in seconds
->>> df["point[0]"] = [0., 1., 2., 3., 4.]
->>> df["point[1]"] = [5., 6., 7., 8., 9.]
->>> df["point[2]"] = [0., 0., 0., 0., 0.]
->>> df
->>> point[0]  point[1]  point[2]
->>> 0.0       0.0       5.0       0.0
->>> 0.1       1.0       6.0       0.0
->>> 0.2       2.0       7.0       0.0
->>> 0.3       3.0       8.0       0.0
->>> 0.4       4.0       9.0       0.0
->>>
->>
+df = pd.DataFrame()
+df.index = [0., 0.1, 0.2, 0.3, 0.4]  # Time in seconds
+df["point[0]"] = [0., 1., 2., 3., 4.]
+df["point[1]"] = [5., 6., 7., 8., 9.]
+df["point[2]"] = [0., 0., 0., 0., 0.]
+df
+point[0]  point[1]  point[2]
+0.0       0.0       5.0       0.0
+0.1       1.0       6.0       0.0
+0.2       2.0       7.0       0.0
+0.3       3.0       8.0       0.0
+0.4       4.0       9.0       0.0
 
->>> ts = ktk.TimeSeries(df)
->>> ts.data
->>> {'point': array([[0., 5., 0.],
->>> [1., 6., 0.],
->>> [2., 7., 0.],
->>> [3., 8., 0.],
->>> [4., 9., 0.]])}
->>>
->>
+
+
+ts = ktk.TimeSeries(df)
+ts.data
+{'point': array([[0., 5., 0.],
+[1., 6., 0.],
+[2., 7., 0.],
+[3., 8., 0.],
+[4., 9., 0.]])}
+
+
 
 See Also: TimeSeries.from_dataframe
 
 6. Creating a multidimensional TimeSeries of higher order from a Pandas
    DataFrame (using brackets and commas in column names):
 
->>> df = pd.DataFrame()
->>> df.index = [0., 0.1, 0.2, 0.3, 0.4]  # Time in seconds
->>> df["rot[0,0]"] = np.cos([0., 0.1, 0.2, 0.3, 0.4])
->>> df["rot[0,1]"] = -np.sin([0., 0.1, 0.2, 0.3, 0.4])
->>> df["rot[1,0]"] = np.sin([0., 0.1, 0.2, 0.3, 0.4])
->>> df["rot[1,1]"] = np.cos([0., 0.1, 0.2, 0.3, 0.4])
->>> df["trans[0]"] = [0., 0.1, 0.2, 0.3, 0.4]
->>> df["trans[1]"] = [5., 6., 7., 8., 9.]
->>> df
->>> rot[0,0]  rot[0,1]  rot[1,0]  rot[1,1]  trans[0]  trans[1]
->>> 0.0  1.000000 -0.000000  0.000000  1.000000       0.0       5.0
->>> 0.1  0.995004 -0.099833  0.099833  0.995004       0.1       6.0
->>> 0.2  0.980067 -0.198669  0.198669  0.980067       0.2       7.0
->>> 0.3  0.955336 -0.295520  0.295520  0.955336       0.3       8.0
->>> 0.4  0.921061 -0.389418  0.389418  0.921061       0.4       9.0
->>>
->>
+df = pd.DataFrame()
+df.index = [0., 0.1, 0.2, 0.3, 0.4]  # Time in seconds
+df["rot[0,0]"] = np.cos([0., 0.1, 0.2, 0.3, 0.4])
+df["rot[0,1]"] = -np.sin([0., 0.1, 0.2, 0.3, 0.4])
+df["rot[1,0]"] = np.sin([0., 0.1, 0.2, 0.3, 0.4])
+df["rot[1,1]"] = np.cos([0., 0.1, 0.2, 0.3, 0.4])
+df["trans[0]"] = [0., 0.1, 0.2, 0.3, 0.4]
+df["trans[1]"] = [5., 6., 7., 8., 9.]
+df
+rot[0,0]  rot[0,1]  rot[1,0]  rot[1,1]  trans[0]  trans[1]
+0.0  1.000000 -0.000000  0.000000  1.000000       0.0       5.0
+0.1  0.995004 -0.099833  0.099833  0.995004       0.1       6.0
+0.2  0.980067 -0.198669  0.198669  0.980067       0.2       7.0
+0.3  0.955336 -0.295520  0.295520  0.955336       0.3       8.0
+0.4  0.921061 -0.389418  0.389418  0.921061       0.4       9.0
 
->>> ts = ktk.TimeSeries(df)
->>> ts.data
->>> {'rot': array([[[ 1.        , -0.        ],
->>> [ 0.        ,  1.        ]],
->>> `<BLANKLINE>`
->>> [[ 0.99500417, -0.09983342],
->>> [ 0.09983342,  0.99500417]],
->>> `<BLANKLINE>`
->>> [[ 0.98006658, -0.19866933],
->>> [ 0.19866933,  0.98006658]],
->>> `<BLANKLINE>`
->>> [[ 0.95533649, -0.29552021],
->>> [ 0.29552021,  0.95533649]],
->>> `<BLANKLINE>`
->>> [[ 0.92106099, -0.38941834],
->>> [ 0.38941834,  0.92106099]]]), 'trans': array([[0. , 5. ],
->>> [0.1, 6. ],
->>> [0.2, 7. ],
->>> [0.3, 8. ],
->>> [0.4, 9. ]])}
->>>
->>
+
+
+ts = ktk.TimeSeries(df)
+ts.data
+{'rot': array([[[ 1.        , -0.        ],
+[ 0.        ,  1.        ]],
+
+[[ 0.99500417, -0.09983342],
+[ 0.09983342,  0.99500417]],
+
+[[ 0.98006658, -0.19866933],
+[ 0.19866933,  0.98006658]],
+
+[[ 0.95533649, -0.29552021],
+[ 0.29552021,  0.95533649]],
+
+[[ 0.92106099, -0.38941834],
+[ 0.38941834,  0.92106099]]]), 'trans': array([[0. , 5. ],
+[0.1, 6. ],
+[0.2, 7. ],
+[0.3, 8. ],
+[0.4, 9. ]])}
+
+
 
 See Also: TimeSeries.from_dataframe
 
@@ -207,27 +226,39 @@ See Also: TimeSeries.from_dataframe
    single data key named "data" and with a matching time property with a
    period of 1 second - unless time attribute is also defined):
 
->>> ktk.TimeSeries([0.1, 0.2, 0.3, 0.4, 0.5])
->>> TimeSeries with attributes:
->>> time: array([0., 1., 2., 3., 4.])
->>> data: {'data': array([0.1, 0.2, 0.3, 0.4, 0.5])}
->>> time_info: {'Unit': 's'}
->>> data_info: {}
->>> events: []
->>>
->>
+ktk.TimeSeries([0.1, 0.2, 0.3, 0.4, 0.5])
+TimeSeries with attributes:
+time: array([0., 1., 2., 3., 4.])
+data: {'data': array([0.1, 0.2, 0.3, 0.4, 0.5])}
+time_info: {'Unit': 's'}
+data_info: {}
+events: []
 
->>> ktk.TimeSeries([0.1, 0.2, 0.3, 0.4, 0.5], time=[0.1, 0.2, 0.3, 0.4, 0.5])
->>> TimeSeries with attributes:
->>> time: array([0.1, 0.2, 0.3, 0.4, 0.5])
->>> data: {'data': array([0.1, 0.2, 0.3, 0.4, 0.5])}
->>> time_info: {'Unit': 's'}
->>> data_info: {}
->>> events: []
->>>
->>
 
-See Also: TimeSeries.from_array\n\n---\n\n### `TimeSeriesDataDict(source: 'dict' = {})`\n\nData dictionary that checks sizes and converts to NumPy arrays.\n\n---\n\n### `TimeSeriesEvent(time: 'float' = 0.0, name: 'str' = 'event') -> None`\n\nDefine an event in a TimeSeries.
+
+ktk.TimeSeries([0.1, 0.2, 0.3, 0.4, 0.5], time=[0.1, 0.2, 0.3, 0.4, 0.5])
+TimeSeries with attributes:
+time: array([0.1, 0.2, 0.3, 0.4, 0.5])
+data: {'data': array([0.1, 0.2, 0.3, 0.4, 0.5])}
+time_info: {'Unit': 's'}
+data_info: {}
+events: []
+
+
+
+See Also: TimeSeries.from_array
+
+---
+
+### `TimeSeriesDataDict(source: 'dict' = {})`
+
+Data dictionary that checks sizes and converts to NumPy arrays.
+
+---
+
+### `TimeSeriesEvent(time: 'float' = 0.0, name: 'str' = 'event') -> None`
+
+Define an event in a TimeSeries.
 
 This class is rarely used by itself, it is easier to use `TimeSeries`'
 methods to manage events.
@@ -244,11 +275,29 @@ name : str
 Example
 -------
 
->>> event = ktk.TimeSeriesEvent(time=1.5, name="event_name")
->>> event
->>> TimeSeriesEvent(time=1.5, name='event_name')\n\n---\n\n### `TimeSeriesEventList(source: 'list' = [])`\n\nEvent list that ensures every element is a TimeSeriesEvent.\n\n---\n\n## Module: `kineticstoolkit.filters`\n\nProvide standard filters for TimeSeries.\n\n### **Functions**\n\n### `butter(ts: kineticstoolkit.timeseries.TimeSeries, /, fc: float | tuple[float, float], *, order: int = 2, btype: str = 'lowpass', filtfilt: bool = True) -> kineticstoolkit.timeseries.TimeSeries`\n\nApply a Butterworth filter to a TimeSeries.
->>>
->>
+event = ktk.TimeSeriesEvent(time=1.5, name="event_name")
+event
+TimeSeriesEvent(time=1.5, name='event_name')
+
+---
+
+### `TimeSeriesEventList(source: 'list' = [])`
+
+Event list that ensures every element is a TimeSeriesEvent.
+
+---
+
+## Module: `kineticstoolkit.filters`
+
+Provide standard filters for TimeSeries.
+
+### **Functions**
+
+### `butter(ts: kineticstoolkit.timeseries.TimeSeries, /, fc: float | tuple[float, float], *, order: int = 2, btype: str = 'lowpass', filtfilt: bool = True) -> kineticstoolkit.timeseries.TimeSeries`
+
+Apply a Butterworth filter to a TimeSeries.
+
+
 
 Filtering occurs on the first axis (time). If the TimeSeries contains
 missing samples, a warning is issued, missing samples are interpolated
@@ -285,7 +334,13 @@ Raises
 
 ValueError
     If sample rate is not constant, or if there is no data to
-    filter.\n\n---\n\n### `deriv(ts: kineticstoolkit.timeseries.TimeSeries, /, n: int = 1) -> kineticstoolkit.timeseries.TimeSeries`\n\nCalculate the nth numerical derivative.
+    filter.
+
+---
+
+### `deriv(ts: kineticstoolkit.timeseries.TimeSeries, /, n: int = 1) -> kineticstoolkit.timeseries.TimeSeries`
+
+Calculate the nth numerical derivative.
 
 Filtering occurs on the first axis (time). The sample rate must be
 constant.
@@ -316,45 +371,51 @@ ValueError
 Example
 -------
 
->>> ts = ktk.TimeSeries(time=np.arange(0, 0.5, 0.1))
->>> ts = ts.add_data("test", np.array([0.0, 0.0, 1.0, 1.0, 0.0]))
->>>
->>
+ts = ktk.TimeSeries(time=np.arange(0, 0.5, 0.1))
+ts = ts.add_data("test", np.array([0.0, 0.0, 1.0, 1.0, 0.0]))
 
->>> # Source data
->>>
->>> ts.time
->>> array([0. , 0.1, 0.2, 0.3, 0.4])
->>> ts.data["test"]
->>> array([0., 0., 1., 1., 0.])
->>>
->>
 
->>> # First derivative
->>>
->>> ts1 = ktk.filters.deriv(ts)
->>>
->>
 
->>> ts1.time
->>> array([0.05, 0.15, 0.25, 0.35])
->>> ts1.data["test"]
->>> array([  0.,  10.,   0., -10.])
->>>
->>
+# Source data
 
->>> # Second derivative
->>>
->>> ts2 = ktk.filters.deriv(ts, n=2)
->>>
->>
+ts.time
+array([0. , 0.1, 0.2, 0.3, 0.4])
+ts.data["test"]
+array([0., 0., 1., 1., 0.])
 
->>> ts2.time
->>> array([0.1, 0.2, 0.3])
->>> ts2.data["test"]
->>> array([ 100., -100., -100.])\n\n---\n\n### `median(ts: kineticstoolkit.timeseries.TimeSeries, /, window_length: int = 3) -> kineticstoolkit.timeseries.TimeSeries`\n\nCalculate a moving median.
->>>
->>
+
+
+# First derivative
+
+ts1 = ktk.filters.deriv(ts)
+
+
+
+ts1.time
+array([0.05, 0.15, 0.25, 0.35])
+ts1.data["test"]
+array([  0.,  10.,   0., -10.])
+
+
+
+# Second derivative
+
+ts2 = ktk.filters.deriv(ts, n=2)
+
+
+
+ts2.time
+array([0.1, 0.2, 0.3])
+ts2.data["test"]
+array([ 100., -100., -100.])
+
+---
+
+### `median(ts: kineticstoolkit.timeseries.TimeSeries, /, window_length: int = 3) -> kineticstoolkit.timeseries.TimeSeries`
+
+Calculate a moving median.
+
+
 
 Filtering occurs on the first axis (time).
 
@@ -370,13 +431,19 @@ window_length
 Example
 -------
 
->>> ts = ktk.TimeSeries(time=np.arange(0, 6))
->>> ts = ts.add_data("test", [10., 11., 11., 20., 14., 15.])
->>> ts2 = ktk.filters.median(ts)
->>> ts2.data["test"]
->>> array([10., 11., 11., 14., 15., 15.])\n\n---\n\n### `savgol(ts: kineticstoolkit.timeseries.TimeSeries, /, *, window_length: int, poly_order: int, deriv: int = 0) -> kineticstoolkit.timeseries.TimeSeries`\n\nApply a Savitzky-Golay filter on a TimeSeries.
->>>
->>
+ts = ktk.TimeSeries(time=np.arange(0, 6))
+ts = ts.add_data("test", [10., 11., 11., 20., 14., 15.])
+ts2 = ktk.filters.median(ts)
+ts2.data["test"]
+array([10., 11., 11., 14., 15., 15.])
+
+---
+
+### `savgol(ts: kineticstoolkit.timeseries.TimeSeries, /, *, window_length: int, poly_order: int, deriv: int = 0) -> kineticstoolkit.timeseries.TimeSeries`
+
+Apply a Savitzky-Golay filter on a TimeSeries.
+
+
 
 Filtering occurs on the first axis (time). If the TimeSeries contains
 missing samples, a warning is issued, missing samples are interpolated
@@ -414,7 +481,13 @@ ValueError
 See Also
 --------
 
-ktk.filters.smooth\n\n---\n\n### `smooth(ts: kineticstoolkit.timeseries.TimeSeries, /, window_length: int) -> kineticstoolkit.timeseries.TimeSeries`\n\nApply a smoothing (moving average) filter on a TimeSeries.
+ktk.filters.smooth
+
+---
+
+### `smooth(ts: kineticstoolkit.timeseries.TimeSeries, /, window_length: int) -> kineticstoolkit.timeseries.TimeSeries`
+
+Apply a smoothing (moving average) filter on a TimeSeries.
 
 Filtering occurs on the first axis (time). If the TimeSeries contains
 missing samples, a warning is issued, missing samples are interpolated
@@ -446,7 +519,19 @@ ValueError
 See Also
 --------
 
-ktk.filters.savgol\n\n---\n\n## Module: `kineticstoolkit.kinematics`\n\nProvide functions related to kinematics analysis.\n\n### **Functions**\n\n### `create_cluster(markers: kineticstoolkit.timeseries.TimeSeries, /, names: list[str]) -> dict[str, numpy.ndarray]`\n\nCreate a cluster definition based on a static acquisition.
+ktk.filters.savgol
+
+---
+
+## Module: `kineticstoolkit.kinematics`
+
+Provide functions related to kinematics analysis.
+
+### **Functions**
+
+### `create_cluster(markers: kineticstoolkit.timeseries.TimeSeries, /, names: list[str]) -> dict[str, numpy.ndarray]`
+
+Create a cluster definition based on a static acquisition.
 
 Parameters
 ----------
@@ -472,7 +557,13 @@ See Also
 --------
 
 ktk.kinematics.extend_cluster
-ktk.kinematics.track_cluster\n\n---\n\n### `extend_cluster(markers: kineticstoolkit.timeseries.TimeSeries, /, cluster: dict[str, numpy.ndarray], name: str) -> dict[str, numpy.ndarray]`\n\nAdd a point to an existing cluster.
+ktk.kinematics.track_cluster
+
+---
+
+### `extend_cluster(markers: kineticstoolkit.timeseries.TimeSeries, /, cluster: dict[str, numpy.ndarray], name: str) -> dict[str, numpy.ndarray]`
+
+Add a point to an existing cluster.
 
 Parameters
 ----------
@@ -500,7 +591,13 @@ See Also
 --------
 
 ktk.kinematics.create_cluster
-ktk.kinematics.track_cluster\n\n---\n\n### `track_cluster(markers: kineticstoolkit.timeseries.TimeSeries, /, cluster: dict[str, numpy.ndarray], *, include_lcs: bool = False, lcs_name: str = 'LCS') -> kineticstoolkit.timeseries.TimeSeries`\n\nFit a cluster to a TimeSeries of point trajectories.
+ktk.kinematics.track_cluster
+
+---
+
+### `track_cluster(markers: kineticstoolkit.timeseries.TimeSeries, /, cluster: dict[str, numpy.ndarray], *, include_lcs: bool = False, lcs_name: str = 'LCS') -> kineticstoolkit.timeseries.TimeSeries`
+
+Fit a cluster to a TimeSeries of point trajectories.
 
 This function fits a cluster to a TimeSeries and reconstructs a solidified
 version of all the points defined in this cluster.
@@ -530,13 +627,25 @@ See Also
 --------
 
 ktk.kinematics.create_cluster
-ktk.kinematics.track_cluster\n\n---\n\n## Module: `kineticstoolkit.geometry`\n\nProvide 3D geometry and linear algebra functions related to biomechanics.
+ktk.kinematics.track_cluster
+
+---
+
+## Module: `kineticstoolkit.geometry`
+
+Provide 3D geometry and linear algebra functions related to biomechanics.
 
 Note
 ----
 
 As a convention, the first dimension of every array is always N and corresponds
-to time.\n\n### **Functions**\n\n### `create_point_series(array: Optional[kineticstoolkit.typing_.ArrayLike] = None, *, x: Optional[kineticstoolkit.typing_.ArrayLike] = None, y: Optional[kineticstoolkit.typing_.ArrayLike] = None, z: Optional[kineticstoolkit.typing_.ArrayLike] = None, length: int | None = None) -> numpy.ndarray`\n\nCreate an Nx4 point series ([[x, y, z, 1.0], ...]).
+to time.
+
+### **Functions**
+
+### `create_point_series(array: Optional[kineticstoolkit.typing_.ArrayLike] = None, *, x: Optional[kineticstoolkit.typing_.ArrayLike] = None, y: Optional[kineticstoolkit.typing_.ArrayLike] = None, z: Optional[kineticstoolkit.typing_.ArrayLike] = None, length: int | None = None) -> numpy.ndarray`
+
+Create an Nx4 point series ([[x, y, z, 1.0], ...]).
 
 **Single array**
 
@@ -630,7 +739,13 @@ Multiple inputs form::
     >>> ktk.geometry.create_point_series(x=[1.0, 2.0, 3.0], z=[4.0, 5.0, 6.0])
     array([[1., 0., 4., 1.],
            [2., 0., 5., 1.],
-           [3., 0., 6., 1.]])\n\n---\n\n###`create_transform_series(matrices: Optional[kineticstoolkit.typing_.ArrayLike] = None, *, angles: Optional[kineticstoolkit.typing_.ArrayLike] = None, seq: str | None = None, degrees: bool = False, quaternions: Optional[kineticstoolkit.typing_.ArrayLike] = None, scalar_first: bool = False, x: Optional[kineticstoolkit.typing_.ArrayLike] = None, y: Optional[kineticstoolkit.typing_.ArrayLike] = None, z: Optional[kineticstoolkit.typing_.ArrayLike] = None, xy: Optional[kineticstoolkit.typing_.ArrayLike] = None, xz: Optional[kineticstoolkit.typing_.ArrayLike] = None, yz: Optional[kineticstoolkit.typing_.ArrayLike] = None, positions: Optional[kineticstoolkit.typing_.ArrayLike] = None, length: int | None = None) -> numpy.ndarray`\n\nCreate an Nx4x4 transform series from multiple input forms.
+           [3., 0., 6., 1.]])
+
+---
+
+### `create_transform_series(matrices: Optional[kineticstoolkit.typing_.ArrayLike] = None, *, angles: Optional[kineticstoolkit.typing_.ArrayLike] = None, seq: str | None = None, degrees: bool = False, quaternions: Optional[kineticstoolkit.typing_.ArrayLike] = None, scalar_first: bool = False, x: Optional[kineticstoolkit.typing_.ArrayLike] = None, y: Optional[kineticstoolkit.typing_.ArrayLike] = None, z: Optional[kineticstoolkit.typing_.ArrayLike] = None, xy: Optional[kineticstoolkit.typing_.ArrayLike] = None, xz: Optional[kineticstoolkit.typing_.ArrayLike] = None, yz: Optional[kineticstoolkit.typing_.ArrayLike] = None, positions: Optional[kineticstoolkit.typing_.ArrayLike] = None, length: int | None = None) -> numpy.ndarray`
+
+Create an Nx4x4 transform series from multiple input forms.
 
 **Matrix input form**
 
@@ -776,43 +891,49 @@ Examples
 Convert a 2x3x3 rotation matrix series and a 1x4 position series to
 an 2x4x4 homogeneous transform series:
 
->>> positions = [[0.5, 0.6, 0.7]]
->>> rotations = [[[ 1.,  0.,  0.],
->>> ...              [ 0.,  1.,  0.],
->>> ...              [ 0.,  0.,  1.]],
->>> ...             [[ 1.,  0.,  0.],
->>> ...              [ 0.,  0., -1.],
->>> ...              [ 0.,  1.,  0.]]]
->>> ktk.geometry.create_transform_series(rotations, positions=positions)
->>> array([[[ 1. ,  0. ,  0. ,  0.5],
->>> [ 0. ,  1. ,  0. ,  0.6],
->>> [ 0. ,  0. ,  1. ,  0.7],
->>> [ 0. ,  0. ,  0. ,  1. ]],
->>> `<BLANKLINE>`
->>> [[ 1. ,  0. ,  0. ,  0.5],
->>> [ 0. ,  0. , -1. ,  0.6],
->>> [ 0. ,  1. ,  0. ,  0.7],
->>> [ 0. ,  0. ,  0. ,  1. ]]])
->>>
->>
+positions = [[0.5, 0.6, 0.7]]
+rotations = [[[ 1.,  0.,  0.],
+...              [ 0.,  1.,  0.],
+...              [ 0.,  0.,  1.]],
+...             [[ 1.,  0.,  0.],
+...              [ 0.,  0., -1.],
+...              [ 0.,  1.,  0.]]]
+ktk.geometry.create_transform_series(rotations, positions=positions)
+array([[[ 1. ,  0. ,  0. ,  0.5],
+[ 0. ,  1. ,  0. ,  0.6],
+[ 0. ,  0. ,  1. ,  0.7],
+[ 0. ,  0. ,  0. ,  1. ]],
+
+[[ 1. ,  0. ,  0. ,  0.5],
+[ 0. ,  0. , -1. ,  0.6],
+[ 0. ,  1. ,  0. ,  0.7],
+[ 0. ,  0. ,  0. ,  1. ]]])
+
+
 
 **Angle input**
 
 Create a series of two homogeneous transforms that rotates 0, then 90
 degrees around x:
 
->>> ktk.geometry.create_transform_series(angles=[0, 90], seq="x", degrees=True)
->>> array([[[ 1.,  0.,  0.,  0.],
->>> [ 0.,  1.,  0.,  0.],
->>> [ 0.,  0.,  1.,  0.],
->>> [ 0.,  0.,  0.,  1.]],
->>> `<BLANKLINE>`
->>> [[ 1.,  0.,  0.,  0.],
->>> [ 0.,  0., -1.,  0.],
->>> [ 0.,  1.,  0.,  0.],
->>> [ 0.,  0.,  0.,  1.]]])\n\n---\n\n### `create_vector_series(array: Optional[kineticstoolkit.typing_.ArrayLike] = None, *, x: Optional[kineticstoolkit.typing_.ArrayLike] = None, y: Optional[kineticstoolkit.typing_.ArrayLike] = None, z: Optional[kineticstoolkit.typing_.ArrayLike] = None, length: int | None = None) -> numpy.ndarray`\n\nCreate an Nx4 vector series ([[x, y, z, 0.0], ...]).
->>>
->>
+ktk.geometry.create_transform_series(angles=[0, 90], seq="x", degrees=True)
+array([[[ 1.,  0.,  0.,  0.],
+[ 0.,  1.,  0.,  0.],
+[ 0.,  0.,  1.,  0.],
+[ 0.,  0.,  0.,  1.]],
+
+[[ 1.,  0.,  0.,  0.],
+[ 0.,  0., -1.,  0.],
+[ 0.,  1.,  0.,  0.],
+[ 0.,  0.,  0.,  1.]]])
+
+---
+
+### `create_vector_series(array: Optional[kineticstoolkit.typing_.ArrayLike] = None, *, x: Optional[kineticstoolkit.typing_.ArrayLike] = None, y: Optional[kineticstoolkit.typing_.ArrayLike] = None, z: Optional[kineticstoolkit.typing_.ArrayLike] = None, length: int | None = None) -> numpy.ndarray`
+
+Create an Nx4 vector series ([[x, y, z, 0.0], ...]).
+
+
 
 **Single array**
 
@@ -906,7 +1027,13 @@ Multiple inputs form::
     >>> ktk.geometry.create_vector_series(x=[1.0, 2.0, 3.0], z=[4.0, 5.0, 6.0])
     array([[1., 0., 4., 0.],
            [2., 0., 5., 0.],
-           [3., 0., 6., 0.]])\n\n---\n\n###`get_angles(T: kineticstoolkit.typing_.ArrayLike, seq: str, degrees: bool = False, flip: bool = False) -> numpy.ndarray`\n\nExtract Euler angles from a transform series.
+           [3., 0., 6., 0.]])
+
+---
+
+### `get_angles(T: kineticstoolkit.typing_.ArrayLike, seq: str, degrees: bool = False, flip: bool = False) -> numpy.ndarray`
+
+Extract Euler angles from a transform series.
 
 In case of gimbal lock, a warning is raised, and the third angle is set to
 zero. Note however that the returned angles still represent the correct
@@ -964,7 +1091,13 @@ If `flip` is True:
 
 This function is a wrapper for scipy.transform.Rotation.as_euler. Please
 consult scipy help for more help on intrinsic/extrinsic angles and the
-`seq` parameter.\n\n---\n\n### `get_global_coordinates(local_coordinates: kineticstoolkit.typing_.ArrayLike, reference_frames: kineticstoolkit.typing_.ArrayLike) -> numpy.ndarray`\n\nExpress local coordinates in the global reference frame.
+`seq` parameter.
+
+---
+
+### `get_global_coordinates(local_coordinates: kineticstoolkit.typing_.ArrayLike, reference_frames: kineticstoolkit.typing_.ArrayLike) -> numpy.ndarray`
+
+Express local coordinates in the global reference frame.
 
 Parameters
 ----------
@@ -990,7 +1123,13 @@ np.ndarray
 See Also
 --------
 
-ktk.geometry.get_local_coordinates\n\n---\n\n### `get_local_coordinates(global_coordinates: kineticstoolkit.typing_.ArrayLike, reference_frames: kineticstoolkit.typing_.ArrayLike) -> numpy.ndarray`\n\nExpress global coordinates in local reference frames.
+ktk.geometry.get_local_coordinates
+
+---
+
+### `get_local_coordinates(global_coordinates: kineticstoolkit.typing_.ArrayLike, reference_frames: kineticstoolkit.typing_.ArrayLike) -> numpy.ndarray`
+
+Express global coordinates in local reference frames.
 
 Parameters
 ----------
@@ -1016,7 +1155,13 @@ np.ndarray
 See Also
 --------
 
-ktk.geometry.get_global_coordinates\n\n---\n\n### `get_quaternions(T: kineticstoolkit.typing_.ArrayLike, canonical: bool = False, scalar_first: bool = False) -> numpy.ndarray`\n\nExtract quaternions from a transform series.
+ktk.geometry.get_global_coordinates
+
+---
+
+### `get_quaternions(T: kineticstoolkit.typing_.ArrayLike, canonical: bool = False, scalar_first: bool = False) -> numpy.ndarray`
+
+Extract quaternions from a transform series.
 
 Parameters
 ----------
@@ -1039,7 +1184,13 @@ Returns
 -------
 
 np.ndarray
-    An Nx4 series of quaternions.\n\n---\n\n### `is_point_series(array: kineticstoolkit.typing_.ArrayLike) -> bool`\n\nCheck that the input is an Nx4 point series ([[x, y, z, 1.0], ...]).
+    An Nx4 series of quaternions.
+
+---
+
+### `is_point_series(array: kineticstoolkit.typing_.ArrayLike) -> bool`
+
+Check that the input is an Nx4 point series ([[x, y, z, 1.0], ...]).
 
 Parameters
 ----------
@@ -1052,7 +1203,13 @@ Returns
 
 bool
     True if every sample (other than NaNs) of the input array is a point
-    (an array of length 4 with the last component being 1.0)\n\n---\n\n### `is_transform_series(array: kineticstoolkit.typing_.ArrayLike, /) -> bool`\n\nCheck that the input is an Nx4x4 series of homogeneous transforms.
+    (an array of length 4 with the last component being 1.0)
+
+---
+
+### `is_transform_series(array: kineticstoolkit.typing_.ArrayLike, /) -> bool`
+
+Check that the input is an Nx4x4 series of homogeneous transforms.
 
 Parameters
 ----------
@@ -1065,7 +1222,13 @@ Returns
 
 bool
     True if every sample (other than NaNs) of the input array is a
-    4x4 homogeneous transform.\n\n---\n\n### `is_vector_series(array: kineticstoolkit.typing_.ArrayLike) -> bool`\n\nCheck that the input is an Nx4 vector series ([[x, y, z, 0.0], ...]).
+    4x4 homogeneous transform.
+
+---
+
+### `is_vector_series(array: kineticstoolkit.typing_.ArrayLike) -> bool`
+
+Check that the input is an Nx4 vector series ([[x, y, z, 0.0], ...]).
 
 Parameters
 ----------
@@ -1078,7 +1241,13 @@ Returns
 
 bool
     True if every sample (other than NaNs) of the input array is a vector
-    (an array of length 4 with the last component being 0.0)\n\n---\n\n### `isnan(array: kineticstoolkit.typing_.ArrayLike, /) -> numpy.ndarray`\n\nCheck which samples contain at least one NaN.
+    (an array of length 4 with the last component being 0.0)
+
+---
+
+### `isnan(array: kineticstoolkit.typing_.ArrayLike, /) -> numpy.ndarray`
+
+Check which samples contain at least one NaN.
 
 Parameters
 ----------
@@ -1091,7 +1260,13 @@ Returns
 
 np.ndarray
     Array of bool that is the same size of input's first dimension, with
-    True for the samples that contain at least one NaN.\n\n---\n\n### `matmul(op1: kineticstoolkit.typing_.ArrayLike, op2: kineticstoolkit.typing_.ArrayLike, /) -> numpy.ndarray`\n\nMatrix multiplication between series of matrices.
+    True for the samples that contain at least one NaN.
+
+---
+
+### `matmul(op1: kineticstoolkit.typing_.ArrayLike, op2: kineticstoolkit.typing_.ArrayLike, /) -> numpy.ndarray`
+
+Matrix multiplication between series of matrices.
 
 This function is a wrapper for numpy's matmul function (operator @), that
 uses Kinetics Toolkit's convention that the first dimension always
@@ -1117,15 +1292,21 @@ Example
 A matrix multiplication between one matrix and a series of 3 vectors
 results in a series of 3 vectors.
 
->>> import kineticstoolkit as ktk
->>> mat_series = np.array([[[2.0, 0.0], [0.0, 1.0]]])
->>> vec_series = np.array([[4.0, 5.0], [6.0, 7.0], [8.0, 9.0]])
->>> ktk.geometry.matmul(mat_series, vec_series)
->>> array([[ 8.,  5.],
->>> [12.,  7.],
->>> [16.,  9.]])\n\n---\n\n### `mirror(coordinates, /, axis: str = 'z')`\n\nMirror a series of coordinates.
->>>
->>
+import kineticstoolkit as ktk
+mat_series = np.array([[[2.0, 0.0], [0.0, 1.0]]])
+vec_series = np.array([[4.0, 5.0], [6.0, 7.0], [8.0, 9.0]])
+ktk.geometry.matmul(mat_series, vec_series)
+array([[ 8.,  5.],
+[12.,  7.],
+[16.,  9.]])
+
+---
+
+### `mirror(coordinates, /, axis: str = 'z')`
+
+Mirror a series of coordinates.
+
+
 
 Parameters
 ----------
@@ -1164,7 +1345,13 @@ Mirror the point (1, 2, 3) along the x, y and z axes respectively:
     array([[ 1., -2., 3., 1.]])
 
     >>> ktk.geometry.mirror(p, "z")
-    array([[ 1., 2., -3., 1.]])\n\n---\n\n###`register_points(global_points: kineticstoolkit.typing_.ArrayLike, local_points: kineticstoolkit.typing_.ArrayLike) -> numpy.ndarray`\n\nFind the homogeneous transforms between two series of point clouds.
+    array([[ 1., 2., -3., 1.]])
+
+---
+
+### `register_points(global_points: kineticstoolkit.typing_.ArrayLike, local_points: kineticstoolkit.typing_.ArrayLike) -> numpy.ndarray`
+
+Find the homogeneous transforms between two series of point clouds.
 
 Parameters
 ----------
@@ -1180,7 +1367,13 @@ Returns
 
 np.ndarray
     Array of shape Nx4x4, expressing a series of 4x4 homogeneous
-    transforms.\n\n---\n\n### `rotate(coordinates, /, seq: str, angles: kineticstoolkit.typing_.ArrayLike, *, degrees: bool = False) -> numpy.ndarray`\n\nRotate a series of coordinates along given axes.
+    transforms.
+
+---
+
+### `rotate(coordinates, /, seq: str, angles: kineticstoolkit.typing_.ArrayLike, *, degrees: bool = False) -> numpy.ndarray`
+
+Rotate a series of coordinates along given axes.
 
 Parameters
 ----------
@@ -1237,7 +1430,13 @@ around y, for theta in [0, 10, 20, 30, 40]:
            [0.98480775, 0.1227878 , 0.1227878 , 1.        ],
            [0.93969262, 0.24184476, 0.24184476, 1.        ],
            [0.8660254 , 0.35355339, 0.35355339, 1.        ],
-           [0.76604444, 0.45451948, 0.45451948, 1.        ]])\n\n---\n\n###`scale(coordinates, /, scales)`\n\nScale a series of coordinates.
+           [0.76604444, 0.45451948, 0.45451948, 1.        ]])
+
+---
+
+### `scale(coordinates, /, scales)`
+
+Scale a series of coordinates.
 
 Parameters
 ----------
@@ -1272,7 +1471,13 @@ Scale the point (1, 0, 0) by x, for x in [0, 1, 2, 3, 4]:
            [1., 0., 0., 1.],
            [2., 0., 0., 1.],
            [3., 0., 0., 1.],
-           [4., 0., 0., 1.]])\n\n---\n\n###`translate(coordinates, /, translations)`\n\nTranslate a series of coordinates.
+           [4., 0., 0., 1.]])
+
+---
+
+### `translate(coordinates, /, translations)`
+
+Translate a series of coordinates.
 
 Parameters
 ----------
@@ -1307,7 +1512,19 @@ Translate the point (1, 0, 0) by (x, 1, 0), for x in [0, 1, 2, 3, 4]:
            [2., 1., 0., 1.],
            [3., 1., 0., 1.],
            [4., 1., 0., 1.],
-           [5., 1., 0., 1.]])\n\n---\n\n## Module:`kineticstoolkit.cycles`\n\nIdentify cycles and time-normalize data.\n\n### **Functions**\n\n### `detect_cycles(ts: kineticstoolkit.timeseries.TimeSeries, data_key: str, *, event_names: tuple[str, str] = ('phase1', 'phase2'), thresholds: tuple[float, float] = (0.0, 1.0), directions: tuple[str, str] = ('rising', 'falling'), min_durations: tuple[float, float] = (0.0, 0.0), max_durations: tuple[float, float] = (inf, inf), min_peak_heights: tuple[float, float] = (-inf, -inf), max_peak_heights: tuple[float, float] = (inf, inf)) -> kineticstoolkit.timeseries.TimeSeries`\n\nDetect cycles in a TimeSeries based on a dual threshold approach.
+           [5., 1., 0., 1.]])
+
+---
+
+## Module: `kineticstoolkit.cycles`
+
+Identify cycles and time-normalize data.
+
+### **Functions**
+
+### `detect_cycles(ts: kineticstoolkit.timeseries.TimeSeries, data_key: str, *, event_names: tuple[str, str] = ('phase1', 'phase2'), thresholds: tuple[float, float] = (0.0, 1.0), directions: tuple[str, str] = ('rising', 'falling'), min_durations: tuple[float, float] = (0.0, 0.0), max_durations: tuple[float, float] = (inf, inf), min_peak_heights: tuple[float, float] = (-inf, -inf), max_peak_heights: tuple[float, float] = (inf, inf)) -> kineticstoolkit.timeseries.TimeSeries`
+
+Detect cycles in a TimeSeries based on a dual threshold approach.
 
 This function detects biphasic cycles and identifies the transitions as
 new events in the output TimeSeries. These new events are named:
@@ -1353,7 +1570,13 @@ Returns
 -------
 
 TimeSeries
-    A copy of `ts` with the events added.\n\n---\n\n### `most_repeatable_cycles(data: kineticstoolkit.typing_.ArrayLike, /) -> list[int]`\n\nGet the indexes of the most repeatable cycles in an array.
+    A copy of `ts` with the events added.
+
+---
+
+### `most_repeatable_cycles(data: kineticstoolkit.typing_.ArrayLike, /) -> list[int]`
+
+Get the indexes of the most repeatable cycles in an array.
 
 This function returns an ordered list of the most repeatable to the least
 repeatable cycles.
@@ -1384,22 +1607,28 @@ list[int]
 Example
 -------
 
->>> import kineticstoolkit.lab as ktk
->>> import numpy as np
->>>
->>> # Create a data sample with four different cycles, the most different
->>>
->>> # being cycle 2 (cos instead of sin), then cycle 0.
->>>
->>> x = np.arange(0, 10, 0.1)
->>> data = np.array([np.sin(x),         np.sin(x) + 0.14,         np.cos(x) + 0.14,         np.sin(x) + 0.15])
->>>
->>
+import kineticstoolkit.lab as ktk
+import numpy as np
 
->>> ktk.cycles.most_repeatable_cycles(data)
->>> [1, 3, 0, 2]\n\n---\n\n### `stack(ts: kineticstoolkit.timeseries.TimeSeries, *, n_points: int = 100) -> dict[str, numpy.ndarray]`\n\nStack time-normalized TimeSeries data into a dict of arrays.
->>>
->>
+# Create a data sample with four different cycles, the most different
+
+# being cycle 2 (cos instead of sin), then cycle 0.
+
+x = np.arange(0, 10, 0.1)
+data = np.array([np.sin(x),         np.sin(x) + 0.14,         np.cos(x) + 0.14,         np.sin(x) + 0.15])
+
+
+
+ktk.cycles.most_repeatable_cycles(data)
+[1, 3, 0, 2]
+
+---
+
+### `stack(ts: kineticstoolkit.timeseries.TimeSeries, *, n_points: int = 100) -> dict[str, numpy.ndarray]`
+
+Stack time-normalized TimeSeries data into a dict of arrays.
+
+
 
 This method returns the data of a time-normalized TimeSeries as a dict
 where each key corresponds to a TimeSeries data key, and contains a numpy
@@ -1423,7 +1652,13 @@ dict[str, np.ndarray]
 See Also
 --------
 
-ktk.cycles.unstack\n\n---\n\n### `time_normalize(ts: kineticstoolkit.timeseries.TimeSeries, event_name1: str, event_name2: str, *, n_points: int = 100, span: list[int] | None = None) -> kineticstoolkit.timeseries.TimeSeries`\n\nTime-normalize cycles in a TimeSeries.
+ktk.cycles.unstack
+
+---
+
+### `time_normalize(ts: kineticstoolkit.timeseries.TimeSeries, event_name1: str, event_name2: str, *, n_points: int = 100, span: list[int] | None = None) -> kineticstoolkit.timeseries.TimeSeries`
+
+Time-normalize cycles in a TimeSeries.
 
 This method time-normalizes the TimeSeries at each cycle defined by
 event_name1 and event_name2 on n_points. The time-normalized cycles are
@@ -1467,7 +1702,13 @@ include pre-cycle or post-cycle data. For example, to normalize in
 percents and to include 20% pre-cycle and 15% post-cycle, assign 100 to
 n_points and [-20, 15] to span. The resulting TimeSeries will then wrap
 each 135 points with the cycles starting at 20, 155, etc. and ending at
-119, 254, etc. For each cycle, events outside the 0-100% spans are ignored.\n\n---\n\n### `unstack(data: dict[str, numpy.ndarray], /) -> kineticstoolkit.timeseries.TimeSeries`\n\nUnstack time-normalized data from a dict of arrays to a TimeSeries.
+119, 254, etc. For each cycle, events outside the 0-100% spans are ignored.
+
+---
+
+### `unstack(data: dict[str, numpy.ndarray], /) -> kineticstoolkit.timeseries.TimeSeries`
+
+Unstack time-normalized data from a dict of arrays to a TimeSeries.
 
 This method creates a time-normalized TimeSeries by putting each cycle
 from the provided data dictionary end to end.
@@ -1488,7 +1729,19 @@ TimeSeries
 See Also
 --------
 
-ktk.cycles.stack\n\n---\n\n## Module: `kineticstoolkit.tools`\n\nProvide miscellaneous helper functions.\n\n### **Functions**\n\n### `change_defaults(change_ipython_dict_repr: bool = True, change_matplotlib_defaults: bool = True, change_numpy_print_options: bool = True, change_warnings_format: bool = True) -> None`\n\nEnable Kinetics Toolkit's lab goodies.
+ktk.cycles.stack
+
+---
+
+## Module: `kineticstoolkit.tools`
+
+Provide miscellaneous helper functions.
+
+### **Functions**
+
+### `change_defaults(change_ipython_dict_repr: bool = True, change_matplotlib_defaults: bool = True, change_numpy_print_options: bool = True, change_warnings_format: bool = True) -> None`
+
+Enable Kinetics Toolkit's lab goodies.
 
 This function does not affect Kinetics Toolkit's inner workings. It exists
 mostly for cosmetic reasons, so that working with ktk in an IPython console
@@ -1543,14 +1796,32 @@ Note
 This function is called automatically when importing Kinetics Toolkit in
 lab mode::
 
-    import kineticstoolkit.lab as ktk\n\n---\n\n###`check_interactive_backend() -> None`\n\nWarn if Matplotlib is not using an interactive backend.
+    import kineticstoolkit.lab as ktk
+
+---
+
+### `check_interactive_backend() -> None`
+
+Warn if Matplotlib is not using an interactive backend.
 
 To disable these warnings, for instance if we are generating
 documentation and we need the Player to show a figure, set
-ktk.config.interactive_backend_warning to False.\n\n---\n\n## Module: `kineticstoolkit.player`\n\nProvides the Player class to visualize points and frames in 3d.
+ktk.config.interactive_backend_warning to False.
+
+---
+
+## Module: `kineticstoolkit.player`
+
+Provides the Player class to visualize points and frames in 3d.
 
 The Player class is accessible directly from the toplevel Kinetics
-Toolkit namespace (i.e., ktk.Player).\n\n### **Classes**\n\n### `Player(*ts: kineticstoolkit.timeseries.TimeSeries, interconnections: dict[str, dict[str, typing.Any]] = {'ForcePlatforms': {'Links': [['*_Corner1', '*_Corner2'], ['*_Corner2', '*_Corner3'], ['*_Corner3', '*_Corner4'], ['*_Corner1', '*_Corner4']], 'Color': (0.5, 0.0, 1.0)}}, vectors: dict[str, dict[str, typing.Any]] = {'*Force': {'Origin': '*COP', 'Scale': 0.001, 'Color': (1.0, 1.0, 0.0)}}, current_index: int = 0, current_time: float | None = None, playback_speed: float = 1.0, up: str = 'y', anterior: str = 'x', zoom: float = 1.0, azimuth: float = 0.0, elevation: float = 0.2, pan: tuple[float, float] = (0.0, 0.0), target: tuple[float, float, float] = (0.0, 0.0, 0.0), perspective: bool = True, track: bool = False, default_point_color: str | tuple[float, float, float] = (0.8, 0.8, 0.8), default_interconnection_color: str | tuple[float, float, float] = (0.8, 0.8, 0.8), default_vector_color: str | tuple[float, float, float] = (1.0, 1.0, 0.0), point_size: float = 4.0, interconnection_width: float = 1.5, vector_width: float = 2.0, frame_size: float = 0.1, frame_width: float = 3.0, grid_size: float = 10.0, grid_subdivision_size: float = 1.0, grid_width: float = 1.0, grid_origin: tuple[float, float, float] = (0.0, 0.0, 0.0), grid_color: str | tuple[float, float, float] = (0.3, 0.3, 0.3), background_color: str | tuple[float, float, float] = (0.0, 0.0, 0.0), **kwargs)`\n\nA class that allows visualizing points and frames in 3D.
+Toolkit namespace (i.e., ktk.Player).
+
+### **Classes**
+
+### `Player(*ts: kineticstoolkit.timeseries.TimeSeries, interconnections: dict[str, dict[str, typing.Any]] = {'ForcePlatforms': {'Links': [['*_Corner1', '*_Corner2'], ['*_Corner2', '*_Corner3'], ['*_Corner3', '*_Corner4'], ['*_Corner1', '*_Corner4']], 'Color': (0.5, 0.0, 1.0)}}, vectors: dict[str, dict[str, typing.Any]] = {'*Force': {'Origin': '*COP', 'Scale': 0.001, 'Color': (1.0, 1.0, 0.0)}}, current_index: int = 0, current_time: float | None = None, playback_speed: float = 1.0, up: str = 'y', anterior: str = 'x', zoom: float = 1.0, azimuth: float = 0.0, elevation: float = 0.2, pan: tuple[float, float] = (0.0, 0.0), target: tuple[float, float, float] = (0.0, 0.0, 0.0), perspective: bool = True, track: bool = False, default_point_color: str | tuple[float, float, float] = (0.8, 0.8, 0.8), default_interconnection_color: str | tuple[float, float, float] = (0.8, 0.8, 0.8), default_vector_color: str | tuple[float, float, float] = (1.0, 1.0, 0.0), point_size: float = 4.0, interconnection_width: float = 1.5, vector_width: float = 2.0, frame_size: float = 0.1, frame_width: float = 3.0, grid_size: float = 10.0, grid_subdivision_size: float = 1.0, grid_width: float = 1.0, grid_origin: tuple[float, float, float] = (0.0, 0.0, 0.0), grid_color: str | tuple[float, float, float] = (0.3, 0.3, 0.3), background_color: str | tuple[float, float, float] = (0.0, 0.0, 0.0), **kwargs)`
+
+A class that allows visualizing points and frames in 3D.
 
 `player = ktk.Player(parameters)` creates and launches an interactive
 Player instance. Once the window is open, press `h` to show a help
@@ -1758,13 +2029,25 @@ background_color
 Note
 ----
 
-Matplotlib must be in interactive mode.\n\n---\n\n## Module: `kineticstoolkit.gui`\n\nProvide simple GUI functions.
+Matplotlib must be in interactive mode.
+
+---
+
+## Module: `kineticstoolkit.gui`
+
+Provide simple GUI functions.
 
 Warning
 -------
 
 This module is private and should be considered only as helper functions
-for Kinetics Toolkit's own use.\n\n### **Functions**\n\n### `button_dialog(message: str = 'Please select an option.', choices: list[str] = ['Cancel', 'OK'], **kwargs) -> int`\n\nCreate a blocking dialog message window with a selection of buttons.
+for Kinetics Toolkit's own use.
+
+### **Functions**
+
+### `button_dialog(message: str = 'Please select an option.', choices: list[str] = ['Cancel', 'OK'], **kwargs) -> int`
+
+Create a blocking dialog message window with a selection of buttons.
 
 Parameters
 ----------
@@ -1780,14 +2063,26 @@ Returns
 int
     The button number (0 = First button, 1 = Second button, etc.). If the
     user closes the window instead of clicking a button, a value of -1 is
-    returned.\n\n---\n\n### `get_credentials() -> tuple[str, str]`\n\nAsk the user's username and password.
+    returned.
+
+---
+
+### `get_credentials() -> tuple[str, str]`
+
+Ask the user's username and password.
 
 Returns
 -------
 
 tuple[str]
     A tuple of two strings containing the username and password,
-    respectively, or an empty tuple if the user closed the window.\n\n---\n\n### `get_filename(initial_folder: str = '.') -> str`\n\nGet file name interactively using a file dialog window.
+    respectively, or an empty tuple if the user closed the window.
+
+---
+
+### `get_filename(initial_folder: str = '.') -> str`
+
+Get file name interactively using a file dialog window.
 
 Parameters
 ----------
@@ -1800,7 +2095,13 @@ Returns
 
 str
     The full path of the selected file. An empty string is returned if the
-    user cancelled.\n\n---\n\n### `get_folder(initial_folder: str = '.') -> str`\n\nGet folder interactively using a file dialog window.
+    user cancelled.
+
+---
+
+### `get_folder(initial_folder: str = '.') -> str`
+
+Get folder interactively using a file dialog window.
 
 Parameters
 ----------
@@ -1813,13 +2114,25 @@ Returns
 
 str
     The full path of the selected folder. An empty string is returned if
-    the user cancelled.\n\n---\n\n### `message(message: str = '', **kwargs) -> None`\n\nShow a message window.
+    the user cancelled.
+
+---
+
+### `message(message: str = '', **kwargs) -> None`
+
+Show a message window.
 
 Parameters
 ----------
 
 message
-    The message to show. Use '' to close every message window.\n\n---\n\n### `set_color_order(setting: str | list[typing.Any]) -> None`\n\nDefine the standard color order for matplotlib.
+    The message to show. Use '' to close every message window.
+
+---
+
+### `set_color_order(setting: str | list[typing.Any]) -> None`
+
+Define the standard color order for matplotlib.
 
 Parameters
 ----------
@@ -1835,6 +2148,52 @@ setting
 
     - If a list, it can be either a list of chars from [bgrcmyk], a list of
       hexadecimal color values, or any list supported by matplotlib's
-      axes.prop_cycle rcParam.\n\n---\n\n## Module:`kineticstoolkit.config`\n\nProvide configuration values for Kinetics Toolkit's internal workings.\n\n## Module: `kineticstoolkit.exceptions`\n\nProvide functions related to exceptions.
+      axes.prop_cycle rcParam.
 
-For internal use only.\n\n### **Classes**\n\n### `TimeSeriesEventNotFoundError()`\n\nThe requested event occurrence was not found.\n\n---\n\n### `TimeSeriesMergeConflictError()`\n\nBoth TimeSeries have a same data key.\n\n---\n\n### `TimeSeriesRangeError()`\n\nThe requested operation exceeds the TimeSeries' time range.\n\n---\n\n### **Functions**\n\n### `raise_ktk_error(e) -> None`\n\nRe-raise an exception with a user message on how to report this bug.\n\n---\n\n### `warn_once(message: str, category=<class 'UserWarning'>, stacklevel: int = 1) -> None`\n\nRaise a warning only once.\n\n---\n\n
+---
+
+## Module: `kineticstoolkit.config`
+
+Provide configuration values for Kinetics Toolkit's internal workings.
+
+## Module: `kineticstoolkit.exceptions`
+
+Provide functions related to exceptions.
+
+For internal use only.
+
+### **Classes**
+
+### `TimeSeriesEventNotFoundError()`
+
+The requested event occurrence was not found.
+
+---
+
+### `TimeSeriesMergeConflictError()`
+
+Both TimeSeries have a same data key.
+
+---
+
+### `TimeSeriesRangeError()`
+
+The requested operation exceeds the TimeSeries' time range.
+
+---
+
+### **Functions**
+
+### `raise_ktk_error(e) -> None`
+
+Re-raise an exception with a user message on how to report this bug.
+
+---
+
+### `warn_once(message: str, category=<class 'UserWarning'>, stacklevel: int = 1) -> None`
+
+Raise a warning only once.
+
+---
+
+
